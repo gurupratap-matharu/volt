@@ -18,6 +18,8 @@ python-decouple = "*"
 gunicorn = "*"
 whitenoise = "*"
 Django = "==3.1"
+django-allauth = "*"
+django-extensions = "*"
 
 [requires]
 python_version = "3.8"
