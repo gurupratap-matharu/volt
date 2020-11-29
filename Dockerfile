@@ -1,16 +1,14 @@
-FROM python:3.6
+FROM python:3.8
 
-ENV FLASK_APP run.py
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
 
-COPY manage.py gunicorn-cfg.py requirements.txt .env ./
-COPY app app
-COPY authentication authentication
-COPY core core
+WORKDIR /code
 
-RUN pip install -r requirements.txt
+COPY Pipfile Pipfile.lock /code/
+RUN /usr/local/bin/python -m pip install --upgrade pip
+RUN pip install pipenv && pipenv install --system
 
-RUN python manage.py makemigrations
-RUN python manage.py migrate
+COPY . /code/
 
 EXPOSE 5005
-CMD ["gunicorn", "--config", "gunicorn-cfg.py", "core.wsgi"]
