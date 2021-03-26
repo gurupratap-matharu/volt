@@ -14,7 +14,7 @@ services:
       - web_network
   
   db:
-    image: postgres:13
+    image: postgres:13.2-alpine
     environment: 
       POSTGRES_PASSWORD: postgres
     volumes:
